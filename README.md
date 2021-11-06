@@ -118,7 +118,7 @@ class FileController extends Controller
         $Base = new Base64ToUploadedFile($request->base64file);
         $file = $Base->file();
         $fullpath = $Base->getFullPath();
-        $file->storeAs('images', $fullpath);
+        $file->storeAs('assets/files/', $fullpath);
     }
 }
 ```
@@ -148,7 +148,7 @@ class FileController extends Controller
         **/
         $info = $Base->getAllinfo();
         // Save File nto Storage
-        $info['file']->storeAs('images', $info['full_path']);
+        $info['file']->storeAs('assets/files/', $info['full_path']);
     }
 }
 ```
