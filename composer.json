@@ -1,0 +1,21 @@
+{
+    "name": "th3khan/base64-to-uploaded-file",
+    "description": "Convert base64 file to UploadedFile of Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anthony Garcia",
+            "email": "anthonydeyvis32@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "th3khan\\Base64ToUploadedFile\\": "src/"
+        }
+    }
+}
