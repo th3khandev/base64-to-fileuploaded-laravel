@@ -152,3 +152,6 @@ class FileController extends Controller
     }
 }
 ```
+
+## License
+This package is licensed under the terms of the MIT licence
