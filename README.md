@@ -42,7 +42,113 @@ class FileController extends Controller
 {
     public function save_base64 (Request $request) {
         $Base = new Base64ToUploadedFile($request->base64file);
-        ++ $filename = $Base->getFilename();
+        $filename = $Base->getFilename(); // example: return 'f485fd45-640c-4eac-ae13-b97088b089f5'
+    }
+}
+```
+**NOTE:**
+returns a random alphanumeric name created by Laravel's Illuminate\Support\Str::class, which will be unique each time the class is instantiated
+
+### Get extension file
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use th3khan\Base64ToUploadedFile\Base64ToUploadedFile;
+
+class FileController extends Controller
+{
+    public function save_base64 (Request $request) {
+        $Base = new Base64ToUploadedFile($request->base64file);
+        $ext = $Base->getExtension(); // example: return 'png'
+    }
+}
+```
+
+## Get File Type
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use th3khan\Base64ToUploadedFile\Base64ToUploadedFile;
+
+class FileController extends Controller
+{
+    public function save_base64 (Request $request) {
+        $Base = new Base64ToUploadedFile($request->base64file);
+        $filetype = $Base->getFileType(); // example: return 'image/jpeg'
+    }
+}
+```
+
+## Get Full Path
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use th3khan\Base64ToUploadedFile\Base64ToUploadedFile;
+
+class FileController extends Controller
+{
+    public function save_base64 (Request $request) {
+        $Base = new Base64ToUploadedFile($request->base64file);
+        $fullpath = $Base->getFullPath(); // example: return 'f485fd45-640c-4eac-ae13-b97088b089f5.jpg'
+    }
+}
+```
+
+## Get File to Save
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use th3khan\Base64ToUploadedFile\Base64ToUploadedFile;
+
+class FileController extends Controller
+{
+    public function save_base64 (Request $request) {
+        $Base = new Base64ToUploadedFile($request->base64file);
+        $file = $Base->file();
+        $fullpath = $Base->getFullPath();
+        $file->storeAs('images', $fullpath);
+    }
+}
+```
+
+## Get all file info like array
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use th3khan\Base64ToUploadedFile\Base64ToUploadedFile;
+
+class FileController extends Controller
+{
+    public function save_base64 (Request $request) {
+        $Base = new Base64ToUploadedFile($request->base64file);
+        /**
+        * This function return a array
+        * return [
+        *   'file'      => Illuminate\Support\Str::class,
+        *   'extension' => 'png',
+        *   'filename'  => 'f485fd45-640c-4eac-ae13-b97088b089f5,
+        *   'full_path' => 'f485fd45-640c-4eac-ae13-b97088b089f5.jpg',
+        *   'file_type' => 'image/jpeg'
+        * ]
+        **/
+        $info = $Base->getAllinfo();
+        // Save File nto Storage
+        $info['file']->storeAs('images', $info['full_path']);
     }
 }
 ```
